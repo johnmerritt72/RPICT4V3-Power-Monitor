@@ -8,4 +8,6 @@ When the stove is turned on, at any power level and any burner, the code makes n
 
 The code also logs the On and Off times for the stove to a log file.
 
-The power consumption is sent from the RPICT4V3 to the Pi via serial port.  Readings are sent every five seconds, so the code averages the last ten readings and considers the stove turned on if the current is over a threshold (determined experimentally).  Most stoves on low heat simply cycle on and off, so averaging the readings over the past 50 seconds is a fairly reliable way to determine whether the stove is on.  This does mean there is a delay in determining when the stove was turned on, but my concern is only when the stove is on for an extended time.
+The power consumption is sent from the RPICT4V3 to the Pi via serial port.  Readings are sent every five seconds, so the code averages the last ten readings and considers the stove turned on if the current is over a threshold (determined experimentally, and is just above the idle power usage).  Most stoves on low heat simply cycle on and off, so averaging the readings over the past 50 seconds is a fairly reliable way to determine whether the stove is on.  This does mean there is a delay in determining when the stove was turned on, but my concern is only when the stove is on for an extended time.
+
+If the average power usage falls below the threshold, the stove is considered to be off, and the state resets.  This means it will take another 20 minutes of On time before a new SMS alert would be sent.
