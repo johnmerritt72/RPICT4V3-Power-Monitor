@@ -75,19 +75,24 @@ try:
                if lastStoveOn == False:
                     # Stove has turned on, save the date/time
                     stoveOnTime = now
+                    msg = "Stove turned on. Current/Average power: %s/%s" % (PowStove, avgStove)                        
+                    logToFile(logfile, msg)
+                    arrUsage = np.float16([avgStove])
                else: # Stove was already on
                     secondsOn = seconds_between(now, stoveOnTime)
+                    a = np.append(arrUsage, PowStove)
+                    arrUsage = a
                     if secondsOn > alertTime and seconds_between(now, lastAlertTime) > alertTime:
                          print(Fore.RED + "Stove has been on %s seconds!" % (int(secondsOn)))
                          print (Style.RESET_ALL, end='')
-                         msg = "Stove has been on %s seconds, average power %s!" % (int(secondsOn), avgStove)                        
-                         sendTextAlert(msg, testMode)
+                         msg = "Stove has been on %s seconds. Average power: %s" % (int(secondsOn), np.average(arrUsage))                        
+                         sendTextAlert("Stove Monitor Alert:" + msg, testMode)
                          logToFile(logfile, msg)
                          lastAlertTime = now
           else:
                stoveOn = False
                if lastStoveOn == True:
-                    msg = "Stove turned off at %s" % (now)
+                    msg = "Stove turned off"
                     logToFile(logfile, msg)
           
           
@@ -96,4 +101,3 @@ try:
 
 except KeyboardInterrupt:
      ser.close()
-
