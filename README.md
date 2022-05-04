@@ -11,7 +11,7 @@ When the stove is turned on, at any power level for any heating element includin
 
 The code also logs the On and Off times for the stove to a log file.
 
-![Screenshot](https://github.com/johnmerritt72/RPICT4V3-Power-Monitor/raw/main/images/Screenshot%202022-05-03%20220423.png)
+![Screenshot](https://github.com/johnmerritt72/RPICT4V3-Power-Monitor/raw/main/images/Screenshot%202022-05-03%20220423b.png)
 
 The power consumption is sent from the RPICT4V3 to the Pi via serial port.  Readings are sent every five seconds, so the code averages the last ten readings and considers the stove turned on if the current is over a threshold (determined experimentally, and is just above the idle power usage).  Most stoves on low heat simply cycle on and off, so averaging the readings over the past 50 seconds is a fairly reliable way to determine whether the stove is on.  This does mean there is a delay in determining when the stove was turned on, but my concern is only when the stove is on for an extended time.
 
