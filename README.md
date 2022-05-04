@@ -4,7 +4,7 @@ This project enables monitoring of A/C power usage from two devices.  In my case
 
 The code runs on a Raspberry Pi using Python 3.5.  The reading of the power is done with a RPICT4V3 device attached to the Pi and two SCT-013-000 current sensors attached to the RPICT4V3.  The current sensors are installed in the main power panel on one of the electrical lines going to the stove and one going to the dryer.  This has the advantage of monitoring for any stove brand/model and cannot easily be disabled or turned off.  NOTE, this requires removing the breaker panel cover and should be done with great caution, preferably by a trained electrician.
 
-When the stove is turned on, at any power level and any burner, the code makes note of the ON time, then keeps monitoring.  If the stove is still on 20 minutes later, it sends an SMS message using Twillio to my personal number.  The message states that the stove is on, how long it has been on, and the power usage. Until the stove is turned off, it will keep sending an update SMS message every 20 minutes.
+When the stove is turned on, at any power level for any heating element including the oven, the code makes note of the ON time, then keeps monitoring.  If the stove is still on 20 minutes later, it sends an SMS message using Twillio to my personal number.  The message states that the stove is on, how long it has been on, and the power usage. Until the stove is turned off, it will keep sending an update SMS message every 20 minutes.
 
 The code also logs the On and Off times for the stove to a log file.
 
